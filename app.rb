@@ -1,6 +1,7 @@
 require 'sinatra/base'
 
 class Battle < Sinatra::Base
+  configure(:development) { set :session_secret, "something" } # shotgun can't store data in sessions
   enable :sessions
 
   get "/" do
@@ -17,6 +18,7 @@ class Battle < Sinatra::Base
   post "/names" do
     session[:player_1_name]= params[:player_1_name]
     session[:player_2_name] = params[:player_2_name]
+    
     redirect '/play'
   end   
 
